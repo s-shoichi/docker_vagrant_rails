@@ -1,0 +1,65 @@
+# 日本語でのコメントを許可
+AsciiComments:
+  Enabled: false
+
+# 複数行での「lambda」で「->」による省略記法を許可
+Lambda:
+  Enabled: false
+
+# モジュール名::クラス名の定義を許可
+ClassAndModuleChildren:
+  Enabled: false
+
+# private/protected は一段深くインデントする
+Style/IndentationConsistency:
+  EnforcedStyle: rails
+
+# メソッド名のprefixに「set_」「get_」を許可
+AccessorMethodName:
+  Enabled: false
+
+# クラスにコメントを残さない
+Documentation:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 20
+
+Metrics/ParameterLists:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 20
+
+Naming/UncommunicativeMethodParamName:
+  MinNameLength: 2
+
+# 空メソッドを許可
+Style/EmptyMethod:
+  Enabled: false
+
+# 「and」「or」の使用を許可
+AndOr:
+  Enabled: false
+
+Rails:
+  Enabled: true
+
+AllCops:
+  TargetRubyVersion: 2.5
+  Exclude:
+    - '**/Rakefile'
+    - '**/config.ru'
+    - 'spec/**/*'
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'Gemfile'
+    - !ruby/regexp /old_and_unused\.rb$/

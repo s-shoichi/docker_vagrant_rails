@@ -1,0 +1,61 @@
+version: '2'
+services:
+  db:
+    build:
+      context: ../
+      dockerfile: ./docker/mysql/Dockerfile
+    environment:
+        - MYSQL_DATABASE=app_development
+    env_file:
+      - .env
+    volumes:
+      - db-data:/var/lib/mysql
+  redis:
+    image: redis:3.0.5
+  app: &app_base
+    tty: true
+    stdin_open: true
+    build:
+      context: ../
+      dockerfile: ./docker/ruby/Dockerfile
+    command: httpd-foreground
+    env_file:
+      - .env
+    environment:
+      - APP_DATABASE_HOST=db
+      - APP_MAIL_SERVER_HOST=mail
+      - APP_MAIL_SERVER_PORT=1025
+      - APP_REDIS_SERVER_HOST=redis
+      - APP_REDIS_SERVER_PORT=6379
+      - APP_HOST=docker.rails-tst
+      - APP_PORT=3000
+      - LC_ALL=C.UTF-8
+    volumes:
+      - ../:/app
+      - socket-data:/app/tmp/sockets
+      - cache:/app/tmp/cache
+    ports:
+      - 3000:3000
+      - 80:80
+      - 443:443
+    depends_on:
+      - db
+      - redis
+      - mail
+  spring:
+    <<: *app_base
+    command: ["spring", "server"]
+    ports: []
+    tty: false
+    stdin_open: false
+  # SMTPポートは1025
+  # ブラウザから192.168.33.10:1080で確認できる
+  mail:
+    image: schickling/mailcatcher
+    ports:
+      - "1080:1080"
+volumes:
+  db-data:
+    driver: local
+  socket-data:
+  cache:
