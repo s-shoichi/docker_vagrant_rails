@@ -31,7 +31,7 @@ services:
       - APP_PORT=3000
       - LC_ALL=C.UTF-8
     volumes:
-      - ../:/app
+      - ../rails:/app
       - socket-data:/app/tmp/sockets
       - cache:/app/tmp/cache
     ports:

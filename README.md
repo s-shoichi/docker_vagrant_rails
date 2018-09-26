@@ -1,3 +1,5 @@
+=========
+
 Vagrant+Docker+rails+mysql+Apache
 
 環境構築手順
@@ -21,12 +23,12 @@ cd /path/to
 
 gitからクローン
 ```bash
-git clone ssh://
+git clone ssh://git@github.com:s-shoichi/docker_vagrant_rails.git
 ```
 
 プロジェクトディレクトリに移動
 ```bash
-cd /path/to/docker-rails
+cd /path/to/docker_vagrant_rails
 ```
 
 docker/.env.sampleをコピーして docker/.env ファイルを作成
@@ -101,3 +103,12 @@ cd ~/share/docker && docker-compose down && docker-compose run -d -p 3000:3000 -
 
 注意事項
 ------------
+
+### railsの初期プロジェクト状態の為、変更する場合
+rails/ 配下の
+* config/database.yml  
+* config/puma.rb  
+* config/secrets.yml  
+* config/environment.rb(必要に応じて)  
+* config/environments/*  
+をプロジェクト新規作成後入れ替え。

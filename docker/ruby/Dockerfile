@@ -11,10 +11,10 @@ RUN dpkg-reconfigure --frontend noninteractive tzdata
 
 RUN mkdir /app
 WORKDIR /app
-ADD ./Gemfile /app
-ADD ./Gemfile.lock /app
+ADD ./rails/Gemfile /app
+ADD ./rails/Gemfile.lock /app
 RUN bundle install
-ADD . /app
+ADD ./rails /app
 
 COPY ./docker/ruby/default-ssl.conf /etc/apache2/sites-available/
 COPY ./docker/ruby/000-default.conf /etc/apache2/sites-available/
