@@ -1,6 +1,5 @@
-=========
-
 Vagrant+Docker+rails+mysql+Apache
+===========
 
 環境構築手順
 ------------
